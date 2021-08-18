@@ -87,7 +87,7 @@ def get_last_traceback(tb):
 
 
 def format_namespace(d, indent='    '):
-    return '\n'.join(['%s%s: %s' % (indent, k, repr(v)[:10000]) for k, v in d.iteritems()])
+    return '\n'.join(['%s%s: %s' % (indent, k, repr(v)[:10000]) for k, v in d.items()])
 
 
 ignored_exceptions = []  # a problem with a line in a module is only reported once per session
@@ -122,8 +122,7 @@ def AddExceptHook(app_version='[No version]'):
         if not os.path.exists(path):
             os.mkdir(path)
         output = open(bug_report_path, 'w')
-        lst = info.keys()
-        lst.sort()
+        lst = sorted(info.keys())
         for a in lst:
             output.write(a + ":\n" + str(info[a]) + "\n\n")
         output.close()

@@ -77,9 +77,9 @@ def GenerateFloatXMLText(extra_values=None, decimal=None):
 
 
 DEFAULT_FACETS = GenerateDictFacets(["pattern", "whiteSpace", "enumeration"])
-NUMBER_FACETS = GenerateDictFacets(DEFAULT_FACETS.keys() + ["maxInclusive", "maxExclusive", "minInclusive", "minExclusive"])
-DECIMAL_FACETS = GenerateDictFacets(NUMBER_FACETS.keys() + ["totalDigits", "fractionDigits"])
-STRING_FACETS = GenerateDictFacets(DEFAULT_FACETS.keys() + ["length", "minLength", "maxLength"])
+NUMBER_FACETS = GenerateDictFacets(list(DEFAULT_FACETS.keys()) + ["maxInclusive", "maxExclusive", "minInclusive", "minExclusive"])
+DECIMAL_FACETS = GenerateDictFacets(list(NUMBER_FACETS.keys()) + ["totalDigits", "fractionDigits"])
+STRING_FACETS = GenerateDictFacets(list(DEFAULT_FACETS.keys()) + ["length", "minLength", "maxLength"])
 
 ALL_FACETS = ["pattern", "whiteSpace", "enumeration", "maxInclusive",
               "maxExclusive", "minInclusive", "minExclusive", "totalDigits",
@@ -204,7 +204,7 @@ def CreateSimpleType(factory, attributes, typeinfos):
                 if len(facets) == 0:
                     facets[facettype] = ([value], False)
                     continue
-                elif facets.keys() == [facettype]:
+                elif list(facets.keys()) == [facettype]:
                     facets[facettype][0].append(value)
                     continue
                 else:
